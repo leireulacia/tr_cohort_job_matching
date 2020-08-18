@@ -1,0 +1,106 @@
+// The purpose of the programme is to get a percentage of matching betweeen 2 lists. One list of the job charasterictics 
+//and the other of the individual skills/characteristics. 100  is the ideal match and 0 indicates do NOT show this person that job.
+// I use my java knoweldge as base for the exercise. 
+
+// Define variables
+
+jobSkillsArray: String array to save the job characteristics 
+jobCohortSkillsList: String array to save the cohort skills
+jobCohortSkillsFile: file to save the cohort file
+totalskillsMatch: Integer to count the amount of skills in common between the 2 lists
+finalpercentage: Integer to save the result of the matching skills percentage
+
+// Greeting to the app
+METHOD WELCOME
+{
+	Print greeting 	
+		"Hello! Welcome to the matching job App. This app help you to know how much the cohort fits to the job "
+	Print prompt
+		press "Enter" to continue 
+		<user presses "Enter">
+}
+
+
+//This method ask to introduce to the user the characteristics for the job and save them in an array.
+METHOD JOBCHARACTERISTICS
+{
+	Print promt
+		"Please, introduce the job characteristics you would like to looking for. Please, enter # when you finish:"
+
+	DO Take the new characteristic and add to right position of the 'jobSkillsArray' variable
+	Reapeat the process WHILE the user introduce symbol "#"
+	
+}
+
+// This method give 2 options: Introduce a list of individual skills or attach the txt file of the cohort. I could explore to add 
+// different kinds of file (not only txt) in the future.
+
+METHOD PersonalSkills
+{
+	print call-to-action
+		"Now it is time to add the details of the COHORT!! Please, press 1 if you prefer to enter a list of skills or 2 if you prefer to use a txt file:"
+
+// I would use a SWITCH statement but now, I consider it is easier to explain with IF statement.
+
+	IF the user press option "1" 
+		Print prompt
+			"Ok! Here we go! Introduce the list of the Cohort skills. Please, enter # when you finish"
+
+			DO Take the new characteristic and add to right position of the 'jobCohortSkillsList' variable
+			Reapeat the process WHILE the user introduce symbol "#"
+
+		GO to method 'CompareList'
+
+	IF the user press option "2"
+		Print prompt
+			"Perfect! Here we go! Please upload the txt file."
+
+			Take the file and add to the file variable 'jobCohortSkillsFile'
+
+		GO to method 'CompareFile'
+
+
+}
+
+
+METHOD CompareList
+{
+	//This method check if the first element in the array 'jobSkillsArray' is in any of the positions of the 'jobCohortSkillsList' array. If yes, +1 to the variable 'totalskillsMatch'.
+	// Repeat the same process until the last 'jobSkillsArray' position
+	GO TO method CalculatePercentage
+}
+
+
+
+
+METHOD CompareFile
+{
+	//This method check if the first element in the array 'jobSkillsArray' is in the file 'jobCohortSkillsFile'. If yes, +1 to the variable totalskillsMatch.
+	// Repeat the same process until the last 'jobSkillsArray' position
+	GO to method CalculatePercentage
+}
+
+
+// This method calculate the matching percentage between the job skills looking for and individual skills.
+METHOD CalculatePercentage
+{
+	finalpercentage= (totalskillsMatch*100)/ jobSkillsArray.length; // The result should be an integer variable
+}
+
+// This method print the final result to the user
+METHOD getResults
+{
+	Print prompt
+		"Regarding the details you introduce. The Cohort skills match in: "+ finalpercentage + " % to the skills you are looking for."
+		"Thanks for using the app!"
+}
+
+
+// As an extension of the app, I'd add new funtionality as introduce more cohort details at the same time, given each an individual id and showing a sorted list
+//  from the best matching to the less matching cohort.  I'd also add the funtionality to start again after finishing.
+
+
+
+
+
+
